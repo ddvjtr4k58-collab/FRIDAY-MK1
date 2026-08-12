@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>FRIDAY OS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="sleep" data-orb-position="center">
+    <div id="face-id-indicator" class="face-id-indicator scanning" aria-hidden="true">
+        <div class="face-id-frame">
+            <span class="face-corner tl"></span>
+            <span class="face-corner tr"></span>
+            <span class="face-corner bl"></span>
+            <span class="face-corner br"></span>
+            <span class="face-scan-line"></span>
+            <span class="face-result face-check">✓</span>
+            <span class="face-result face-x">×</span>
+        </div>
+        <div class="face-id-label">SCANNING</div>
+    </div>
+
+    <div id="background-grid"></div>
+    <div id="background-vignette"></div>
+    <div id="background-scanlines"></div>
+
+    <div id="top-notch">
+        <div class="notch-line left"></div>
+        <div class="notch-core"></div>
+        <div class="notch-line right"></div>
+    </div>
+
+    <div id="title-bar">FRIDAY MK.1</div>
+
+    <div id="core-container" data-status="IDLE">
+        <div id="orb-shell">
+            <div class="orb-halo halo-a"></div>
+            <div class="orb-halo halo-b"></div>
+            <div class="orb-halo halo-c"></div>
+
+            <div class="orb-ring ring-a"></div>
+            <div class="orb-ring ring-b"></div>
+            <div class="orb-ring ring-c"></div>
+
+            <div class="friday-orb orb-idle">
+                <div class="orb-core-light"></div>
+                <div class="orb-line line-a"></div>
+                <div class="orb-line line-b"></div>
+                <div class="orb-line line-c"></div>
+                <div class="orb-node node-a"></div>
+                <div class="orb-node node-b"></div>
+                <div class="orb-node node-c"></div>
+                <div class="orb-node node-d"></div>
+            </div>
+        </div>
+
+        <div id="status-label">IDLE</div>
+    </div>
+
+    <div id="sleep-screen" class="sleep-screen">
+        <div class="sleep-name">FRIDAY</div>
+        <div class="sleep-time">--:--</div>
+        <div class="sleep-date">Standing by</div>
+        <div class="sleep-prompt">Passive workstation layer ready.</div>
+    </div>
+
+    <div id="workstation-scroll" class="workspace-scroll-viewport" data-workspace-scroll="workstation">
+        <div class="workspace-scroll-canvas">
+            <div id="widget-layer"></div>
+        </div>
+    </div>
+
+    <div id="web-quadrant" class="quadrant desktop-widget" data-widget-id="cards" style="display: none;">
+        <div class="widget-header">
+            <div class="quad-title">MULTI_CARD_EXPLORER</div>
+        </div>
+
+        <div id="card-whiteboard"></div>
+        <div class="widget-resize-handle"></div>
+    </div>
+
+    <div id="transcript-quadrant" class="quadrant desktop-widget" data-widget-id="transcript" style="display: none;">
+        <div class="widget-header">
+            <div class="quad-title">LIVE_TRANSCRIPT</div>
+        </div>
+
+        <div id="transcript-box">
+            <p class="friday-text">&gt; FRIDAY: Visual interface initialized.</p>
+            <p class="friday-text">&gt; FRIDAY: Awaiting directives, Boss.</p>
+        </div>
+
+        <div class="widget-resize-handle"></div>
+    </div>
+
+    <div id="chat-quadrant" class="quadrant desktop-widget" data-widget-id="override">
+        <div class="widget-header">
+            <div class="quad-title">MANUAL_OVERRIDE</div>
+        </div>
+
+        <div id="chat-history">
+            <div id="override-response" class="override-response idle">
+                Override channel standing by.
+            </div>
+        </div>
+
+        <input type="text" id="chat-input" placeholder="Type text override here, Boss...">
+        <div class="widget-resize-handle"></div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="renderer.js"></script>
+    <!-- Desktop shell. Additive and read-only: observes state renderer.js already
+         publishes, and never writes to the socket or the voice layer. -->
+    <script src="ui/system-bar.js"></script>
+    <!-- Live voice layer. Additive: reuses renderer.js's socket, loads after it. -->
+    <script src="voice/bootstrap.js"></script>
+
+</body>
+</html>

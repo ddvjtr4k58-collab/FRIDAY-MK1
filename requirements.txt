@@ -1,0 +1,66 @@
+# ============================================================
+# FRIDAY MK1 — Python dependencies
+#
+# Unpinned by design, matching this project's existing convention
+# (no version constraint here was previously justified by a known
+# compatibility issue, so none is added).
+#
+# Packages marked "optional" below are wrapped in try/except at
+# the import site in the source, and FRIDAY degrades the matching
+# feature gracefully if the package is missing. Everything else is
+# imported unguarded and is required for the backend to start.
+# See check_friday.sh for a runtime check of this same list, and
+# README.md ("Environment Setup") for install notes.
+# ============================================================
+
+# Core runtime — the Flask-SocketIO bridge between the Python
+# backend and the Electron frontend (Core_Cognition/state_manager.py),
+# .env loading, and outbound HTTP calls used across the backend.
+Flask
+Flask-SocketIO
+python-dotenv
+requests
+
+# Google and AI — the assistant model itself (Core_Cognition/main.py,
+# Sensory_Array/audio_engine.py). Required for FRIDAY to respond at all.
+google-generativeai
+
+# Calendar — Google Calendar integration (Sensory_Array/calendar_tools.py).
+# Optional as a group: calendar_tools.py wraps this entire import block
+# in one try/except, so Calendar features report "not connected" rather
+# than crashing if any of the three are missing.
+google-auth              # optional — see note above
+google-auth-oauthlib     # optional — see note above
+google-api-python-client # optional — see note above
+
+# Voice and audio (Sensory_Array/audio_engine.py)
+SpeechRecognition
+PyAudio                  # optional — microphone capture is skipped if
+                          # unavailable. macOS also needs the PortAudio
+                          # system library first (see README.md).
+
+# System automation (Sensory_Array/system_tools.py)
+psutil
+Pillow
+pyautogui                # optional — desktop keyboard/mouse automation
+                          # is skipped if unavailable.
+
+# Vision and presence
+# NOTE: opencv-python is currently a HARD startup requirement, not an
+# optional one, even though it looks like a vision-only package.
+# Sensory_Array/system_tools.py does `import cv2` at module level with
+# no try/except, and Core_Cognition/main.py imports system_tools.py
+# unconditionally at startup — so a missing opencv-python currently
+# prevents FRIDAY from starting even with the camera fully disabled in
+# settings. Core_Cognition/camera_presence.py and Sensory_Array/vision_core.py
+# each guard their own separate `import cv2` defensively, but that
+# guarding has no effect while system_tools.py's import stays unguarded.
+# Flagged here per this task's "report, don't fix" scope.
+opencv-python
+
+# Optional integrations
+deepface                 # optional — enables face-ID presence recognition
+                          # (Sensory_Array/vision_core.py), off by default
+                          # (FRIDAY_FACE_ID_ENABLED=0). Heavy: pulls in
+                          # TensorFlow/Keras as a transitive dependency,
+                          # and may need extra native build tooling.

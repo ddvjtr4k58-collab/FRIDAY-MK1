@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Python virtual environments
+venv/
+.venv/
+
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Runtime data
+memory.txt
+
+# Memory v2 store — personal, local-only, never committed
+FRIDAY_OS/Data/memory/
+
+# Calendar
+calendar_token.json
+FRIDAY_OS/Core_Cognition/calendar_credentials.json
+
+# State files
+settings.json
+notes.json
+tasks.json
+notifications.json
+presence_state.json
+proactive_state.json
+proactive_seen.json
+workshop_state.json
+camera_presence_state.json
+
+# Personal data
+FRIDAY_OS/Data/User_Profiles/
+FRIDAY_OS/Data/Virtual_Finder/

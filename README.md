@@ -1,8 +1,6 @@
 # FRIDAY MK1
 
-An AI desktop assistant inspired by Tony Stark's FRIDAY, built from scratch using Python, Electron, JavaScript, and modern AI APIs.
-
-FRIDAY combines voice interaction, computer vision, desktop automation, long-term memory, and intelligent planning into a single desktop operating system prototype.
+A modular AI desktop assistant built from scratch using Python, Electron, JavaScript, and modern AI APIs. Designed to explore voice interaction, computer vision, persistent memory, intelligent planning, and desktop automation.
 
 ---
 
